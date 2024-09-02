@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
-import bcrypt
 from create_db import create_database  # 导入创建数据库的函数
 
 app = Flask(__name__)
@@ -25,16 +24,20 @@ def do_login():
     user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
     conn.close()
 
-    # 直接使用数据库中的字节形式的密码，不进行编码转换
-    if user and bcrypt.checkpw(password.encode('utf-8'), user['password']):
-        return redirect(url_for('success'))  # 登录成功跳转页面
+    # 直接比较密码字符串，不进行加密
+    if user and password == user['password']:
+        return redirect(url_for('dashboard'))  # 登录成功跳转到控制台页面
     else:
         flash('此用户不存在或密码错误')  # 显示错误信息
         return redirect(url_for('login'))  # 返回登录页面
 
-@app.route('/success')
-def success():
-    return 'Login Successful! Welcome to the next page.'
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')  # 渲染控制台页面
+
+@app.route('/help_center')
+def help_center():
+    return render_template('help_center.html')  # 渲染帮助中心页面
 
 if __name__ == '__main__':
     create_database()  # 在应用启动时调用创建数据库的函数
