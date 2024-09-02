@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import sqlite3
+from functools import wraps
 from create_db import create_database  # 导入创建数据库的函数
 
 app = Flask(__name__)
@@ -10,6 +11,15 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'logged_in' not in session:
+            flash('请先登录以访问该页面。')
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/')
 def login():
     return render_template('login.html')
@@ -19,6 +29,11 @@ def do_login():
     username = request.form.get('username')
     password = request.form.get('password')
 
+    # 检查用户名和密码是否为空
+    if not username or not password:
+        flash('请输入用户名和密码')
+        return redirect(url_for('login'))  # 返回登录页面
+
     # 数据库验证
     conn = get_db_connection()
     user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
@@ -26,18 +41,31 @@ def do_login():
 
     # 直接比较密码字符串，不进行加密
     if user and password == user['password']:
-        return redirect(url_for('dashboard'))  # 登录成功跳转到控制台页面
+        session['logged_in'] = True
+        session['username'] = username
+        flash('登录成功！')
+        return redirect(url_for('dashboard'))  # 确保登录后跳转到控制台页面
     else:
         flash('此用户不存在或密码错误')  # 显示错误信息
         return redirect(url_for('login'))  # 返回登录页面
 
+@app.route('/logout')
+def logout():
+    session.clear()  # 清除会话
+    flash('您已成功注销。')
+    return redirect(url_for('login'))
+
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    return render_template('dashboard.html')  # 渲染控制台页面
+    username = session.get('username', '用户')  # 获取当前登录的用户名
+    return render_template('dashboard.html', username=username)  # 渲染控制台页面并传递用户名
 
 @app.route('/help_center')
+@login_required
 def help_center():
-    return render_template('help_center.html')  # 渲染帮助中心页面
+    username = session.get('username', '用户')  # 获取当前登录的用户名
+    return render_template('help_center.html', username=username)  # 渲染帮助中心页面并传递用户名
 
 if __name__ == '__main__':
     create_database()  # 在应用启动时调用创建数据库的函数
