@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        .header {
+            background-color: #6bbe45;
+            padding: 40px 20px;
+            text-align: center;
+            color: #fff;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 14px;
+        }
+        form {
+            padding: 20px;
+        }
+        form input[type="text"], form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #6bbe45;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form input[type="submit"]:hover {
+            background-color: #5da239;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>My Account Login</h1>
+        <p>Unlimited ideas. Unlimited power. Unlimited joy. Unlimited opportunities.</p>
+    </div>
+    <div class="login-container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="error-message">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+        <form action="/login" method="POST">
+            <label for="username">Login</label>
+            <input type="text" id="username" name="username" placeholder="username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <div class="checkbox-container">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
