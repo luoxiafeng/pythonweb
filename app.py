@@ -11,6 +11,11 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+@app.route('/order_form')
+@login_required
+def order_form():
+    return render_template('order_form.html')  # 渲染订单页面
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
