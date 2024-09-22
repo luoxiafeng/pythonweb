@@ -11,11 +11,6 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.route('/order_form')
-@login_required
-def order_form():
-    return render_template('order_form.html')  # 渲染订单页面
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -24,6 +19,12 @@ def login_required(f):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
+
+@app.route('/order_form')
+@login_required
+def order_form():
+    return render_template('order_form.html')  # 渲染订单页面
+
 
 @app.route('/')
 def login():
@@ -71,6 +72,12 @@ def dashboard():
 def help_center():
     username = session.get('username', '用户')  # 获取当前登录的用户名
     return render_template('help_center.html', username=username)  # 渲染帮助中心页面并传递用户名
+
+# 定义购买打卡服务的路由
+@app.route('/purchase/<app_name>')
+def purchase(app_name):
+    # 根据不同的 app_name 显示相应的页面或处理逻辑
+    return f"购买打卡服务 - {app_name}"
 
 if __name__ == '__main__':
     create_database()  # 在应用启动时调用创建数据库的函数

@@ -1,110 +1,97 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线交单</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .form-check-inline {
-            margin-right: 15px;
-        }
-        .time-input {
-            width: 80px;
-        }
-        .btn-check {
-            margin-top: 15px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-4">
-        <h4>在线交单</h4>
-        <div class="form-group">
-            <label>选择：</label>
-            <div>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="校友邦" checked> 校友邦 (0.10/天)
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="职校家园"> 职校家园 (0.10/天)
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="慧职教"> 慧职教 (0.10/天)
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="黔职通"> 黔职通 (0.15/天)
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="学习通"> 学习通 (0.10/天)
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="习讯云"> 习讯云 (0.15/天)
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="options" value="广西职业院校公众"> 广西职业院校公众 (0.10/天)
-                </label>
-            </div>
+{% extends 'base.html' %}
+
+{% block title %}在线交单{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>在线交单</h4>
+    <div class="form-group">
+        <label>选择：</label>
+        <div>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="校友邦" checked> 校友邦 (0.10/天)
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="职校家园"> 职校家园 (0.10/天)
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="慧职教"> 慧职教 (0.10/天)
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="黔职通"> 黔职通 (0.15/天)
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="学习通"> 学习通 (0.10/天)
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="习讯云"> 习讯云 (0.15/天)
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="options" value="广西职业院校公众"> 广西职业院校公众 (0.10/天)
+            </label>
         </div>
-        <div class="form-group">
-            <span>支持上，下班打卡！周报！</span>
+    </div>
+    <div class="form-group">
+        <span>支持上，下班打卡！周报！</span>
+    </div>
+    <div class="form-group">
+        <label>周期选择：</label>
+        <div>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周一" checked> 周一
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周二" checked> 周二
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周三" checked> 周三
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周四" checked> 周四
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周五" checked> 周五
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周六" checked> 周六
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周日" checked> 周日
+            </label>
         </div>
-        <div class="form-group">
-            <label>周期选择：</label>
-            <div>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周一" checked> 周一
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周二" checked> 周二
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周三" checked> 周三
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周四" checked> 周四
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周五" checked> 周五
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周六" checked> 周六
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周日" checked> 周日
-                </label>
-            </div>
+    </div>
+    <div class="form-group">
+        <label>报表选择：</label>
+        <div>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="日报"> 日报
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="周报" checked> 周报
+            </label>
+            <label class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="月报"> 月报
+            </label>
         </div>
-        <div class="form-group">
-            <label>报表选择：</label>
-            <div>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="日报"> 日报
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="周报" checked> 周报
-                </label>
-                <label class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" value="月报"> 月报
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>上班时间：</label>
-            <input type="time" class="time-input" value="07:30">
-            <label>下班时间：</label>
-            <input type="time" class="time-input" value="18:10">
-        </div>
-        <p>温馨提示：设置打卡时间的时间段，在原时间上提前1^~2分钟，打卡也有一定的缓冲时间！</p>
-        <div class="form-group">
-            <label>账号</label>
-            <input type="text" class="form-control" placeholder="请输入账号">
-        </div>
-        <div class="form-group">
-            <label>密码</label>
-            <input type="password" class="form-control" placeholder="请输入密码">
-        </div>
+    </div>
+    <div class="form-group">
+        <label>上班时间：</label>
+        <input type="time" class="time-input" value="07:30">
+        <label>下班时间：</label>
+        <input type="time" class="time-input" value="18:10">
+    </div>
+    <p>温馨提示：设置打卡时间的时间段，在原时间上提前1~2分钟，打卡也有一定的缓冲时间！</p>
+    <div class="form-group">
+        <label>账号</label>
+        <input type="text" class="form-control" placeholder="请输入账号">
+    </div>
+    <div class="form-group">
+        <label>密码</label>
+        <input type="password" class="form-control" placeholder="请输入密码">
+    </div>
+    <!-- 确保按钮被正确渲染 -->
+    <div class="form-group">
         <button type="button" class="btn btn-primary btn-check">查询</button>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
